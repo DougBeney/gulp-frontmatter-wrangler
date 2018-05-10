@@ -1,0 +1,20 @@
+{
+  "name": "gulp-frontmatter-wrangler",
+  "version": "1.0.0",
+  "description": "Temporarily remove the frontmatter of a file and then add it back whenever you are ready.",
+  "keywords": [
+    "gulpplugin",
+    "frontmatter"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Doug Beney",
+  "license": "MIT",
+  "dependencies": {
+    "front-matter": "^2.3.0",
+    "plugin-error": "^1.0.1",
+    "through2": "^2.0.3"
+  }
+}
