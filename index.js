@@ -7,7 +7,7 @@ const PLUGIN_NAME = 'gulp-frontmatter-wrangler'
 
 // exporting the plugin main function
 module.exports = {
-	frontmatter: "",
+	frontmatter: {},
 	getFrontMatter: function(contents){
 		var frontMatterObject = frontMatter(contents);
 		var attributes = frontMatterObject['attributes'];
@@ -23,7 +23,7 @@ module.exports = {
 			body: frontMatterObject['body'],
 		}
 	},
-	take: function() {
+	take: function(namespace) {
 		var PluginObject = this
 		var stream = through.obj(function(file, enc, cb) {
 			if (file.isStream()) {
@@ -33,7 +33,7 @@ module.exports = {
 			if (file.isBuffer()) {
 				const contents = String(file.contents)
 				const frontMatterObject = PluginObject.getFrontMatter(contents)
-				PluginObject.frontmatter = frontMatterObject['frontmatter']
+				PluginObject.frontmatter[namespace] = frontMatterObject['frontmatter']
 				file.contents = new Buffer(frontMatterObject['body'])
 			}
 			// make sure the file goes through the next gulp plugin
@@ -46,7 +46,7 @@ module.exports = {
 		// returning the file stream
 		return stream
 	},
-	putBack: function() {
+	putBack: function(namespace) {
 		var PluginObject = this
 		var stream = through.obj(function(file, enc, cb) {
 			if (file.isStream()) {
@@ -55,7 +55,7 @@ module.exports = {
 			}
 			if (file.isBuffer()) {
 				const contents = String(file.contents)
-				file.contents = new Buffer(PluginObject.frontmatter + contents)
+				file.contents = new Buffer(PluginObject.frontmatter[namespace] + contents)
 			}
 
 			this.push(file)

@@ -1,6 +1,6 @@
 {
   "name": "gulp-frontmatter-wrangler",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Temporarily remove the frontmatter of a file and then add it back whenever you are ready.",
   "keywords": [
     "gulpplugin",
